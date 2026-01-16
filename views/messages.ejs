@@ -1,0 +1,55 @@
+<%- include('shared/header') %>
+
+  <div class="container py-5 my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="card shadow text-center p-4">
+
+          <img src="/img/avatar.png" class="rounded-circle mx-auto mb-3" style="width:120px" alt="avatar">
+
+          <h4 class="mb-3">Ahmed Abd Al-Muti</h4>
+
+          <!-- زر Share Profile -->
+          <button id="shareBtn" class="btn btn-outline-primary mt-3">
+            Share Profile
+          </button>
+
+          <!-- صندوق Link + QR مخفي -->
+          <div id="shareBox" class="d-none mt-3 border rounded p-3 bg-light text-center">
+
+            <!-- Profile Link -->
+            <p class="mb-2">Profile Link:</p>
+            <a href="<%= url %>" target="_blank" class="text-decoration-none fw-bold">
+              <%= url %>
+            </a>
+
+            <!-- QR Code -->
+            <img src="<%= qrCodeDataURL %>" alt="QR Code" class="img-fluid mt-2" style="max-width:160px">
+
+          </div>
+
+        </div>
+
+        <!-- الرسائل -->
+        <div class="mt-4">
+          <% if(messages.length===0){ %>
+            <p class="text-center">No messages yet...</p>
+            <% } else { %>
+              <% for (let index=0; index < messages.length; index++) { %>
+                <% const message=messages[index]; %>
+                  <div class="card mt-4 p-3">
+                    <h5 class="text-center">
+                      <%= message.message %>
+                    </h5>
+                  </div>
+                  <% } %>
+                    <% } %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ربط ملف الـ JS -->
+  <script src="/js/script.js"></script>
