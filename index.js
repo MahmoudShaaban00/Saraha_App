@@ -33,10 +33,10 @@ app.set("trust proxy", 1);
 ===================== */
 app.set("view engine", "ejs");
 // Views
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.resolve() +"/views");
 
 // Static Files
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(path.resolve(), "public")));
 
 /* =====================
    Body Parser
