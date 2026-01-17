@@ -24,7 +24,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /* =====================
-   Trust proxy (Vercel)
+   Trust Proxy (important)
 ===================== */
 app.set("trust proxy", 1);
 
@@ -32,11 +32,12 @@ app.set("trust proxy", 1);
    View Engine
 ===================== */
 app.set("view engine", "ejs");
-// Views
-app.set("views", path.resolve() +"/views");
+app.set("views", path.join(__dirname, "views"));
 
-// Static Files
-app.use(express.static(path.join(path.resolve(), "public")));
+/* =====================
+   Static Files
+===================== */
+app.use(express.static(path.join(__dirname, "public")));
 
 /* =====================
    Body Parser
@@ -44,27 +45,34 @@ app.use(express.static(path.join(path.resolve(), "public")));
 app.use(express.urlencoded({ extended: true }));
 
 /* =====================
-   CORS
+   CORS (allow cookies)
 ===================== */
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 /* =====================
-   Session
+   Session (FIXED)
 ===================== */
 app.use(
   session({
     name: "sessionId",
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || "secretKey",
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URI,
       collectionName: "mySessions",
     }),
     cookie: {
-      secure: process.env.NODE_ENV === "production",
+      secure: false,        // ❗ لازم false في localhost
       httpOnly: true,
       sameSite: "lax",
+      maxAge: 1000 * 60 * 60, // ساعة
     },
   })
 );
@@ -84,6 +92,15 @@ app.use(messageRouter);
 app.use(userRouter);
 
 /* =====================
-   Export for Vercel
+   Server
+===================== */
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+/* =====================
+   Export (Vercel)
 ===================== */
 export default app;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sarahah</title>
+  <title>Sarahah - Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
@@ -13,14 +13,53 @@
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
+  <!-- Header -->
   <%- include('shared/header') %>
 
-  <main class="container mt-4">
-    <h1 class="text-center">Welcome to Sarahah</h1>
-  </main>
+  <!-- Hero Section -->
+  <section class="bg-light text-center py-5">
+    <div class="container">
+      <h1 class="display-4">Welcome to Sarahah</h1>
+      <p class="lead">Send and receive honest feedback anonymously.</p>
+      <a href="/register" class="btn btn-primary btn-lg me-2">Sign Up</a>
+      <a href="/login" class="btn btn-outline-primary btn-lg">Login</a>
+    </div>
+  </section>
 
+  <!-- Features Section -->
+  <section class="container py-5">
+    <h2 class="text-center mb-4">Features</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow">
+          <div class="card-body">
+            <h5 class="card-title">Anonymous Feedback</h5>
+            <p class="card-text">Receive honest opinions without revealing your identity.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow">
+          <div class="card-body">
+            <h5 class="card-title">Easy to Use</h5>
+            <p class="card-text">Simple interface to send and read feedback anytime, anywhere.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 text-center shadow">
+          <div class="card-body">
+            <h5 class="card-title">Secure & Private</h5>
+            <p class="card-text">Your messages and data are safe with us.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include('shared/footer') %>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
